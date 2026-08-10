@@ -1,1 +1,1 @@
-# CPA-AI-Bootcamp
+# CPA-AI
