@@ -51,3 +51,49 @@
 - 2.2025-03 대주주 계열 가온건설㈜에 280억원 신용공여를 실행: 내부거래 적절하게 제거되었는지 확인 필요.
 - 3.하반기 지방 상가·부동산 PF 경기가 나빠졌고, 9월에 기업차주 2곳이 워크아웃을 시작: 사업 특성상 지역 경기에 영향을 크게 받기 때문에 이에 대한 영향을 고려할 필요가 있으며, 워크아웃으로 인한 영향도 고려해야함.
 - 4.연말 충당금은 ECL 모형 산출액에 경영진 판단 조정(overlay)을 반영함: 2025년 당기순이익은 142.38억이고, 경영진이 판단으로 조정한 액수가 25억으로, 만약 해당 조정을 수행하지 않았다면 당기순이익은 117.38억원으로 2025년 경영목표인 당기순이익 120억원을 달성하지 못하고, 해당 조정으로 인해 임원 성과금이 25억원이 증가하게 됐다는 정황.
+
+## ② 데이터 인벤토리 (노트북) ##
+  구글 코랩으로 진행: https://colab.research.google.com/drive/1Pg1nRdnInNU4BoRYnIXP7upC6x6zibDU#scrollTo=zdCwy1IZPx54
+
+  결측치 확인 결과
+3 01a_je_users.csv	hire_date	1	0.062
+2	01a_je_users.csv	approval_limit	1	0.062
+7	05_loan_master.csv	approval_limit	1	0.000
+37	13_loan_confirmations.csv	difference	3	0.061
+36	13_loan_confirmations.csv	confirmed_balance	3	0.061
+40	08_ecl_parameters.xlsx::CCF	remark	3	0.750
+33	08a_individual_assessment.csv	appraisal_date	4	0.400
+39	08_ecl_parameters.xlsx::LGD_담보	haircut	4	0.400
+34	08a_individual_assessment.csv	assumed_haircut	4	0.400
+21	05b_collateral_appraisals.csv	appraisal_date	5	0.002
+4	01a_je_users.csv	termination_date	15	0.938
+5	02_trial_balance.csv	note	34	0.971
+38	13_loan_confirmations.csv	borrower_remark	42	0.857
+35	11_writeoff_recovery.csv	approval_ref	617	0.758
+14	05a_borrowers.csv	credit_score	1189	0.259
+13	05a_borrowers.csv	annual_income_10k	1189	0.259
+12	05a_borrowers.csv	age	1189	0.259
+15	05a_borrowers.csv	job_type	1189	0.259
+16	05a_borrowers.csv	employment_years	1189	0.259
+10	05_loan_master.csv	dsr	1300	0.260
+24	06a_pd_training_2024.csv	age	2036	0.253
+27	06a_pd_training_2024.csv	job_type	2036	0.253
+29	06a_pd_training_2024.csv	dsr	2036	0.253
+26	06a_pd_training_2024.csv	credit_score	2207	0.275
+22	05b_collateral_appraisals.csv	note	2412	1.000
+25	06a_pd_training_2024.csv	annual_income_10k	2518	0.313
+11	05_loan_master.csv	ltv_at_appraisal	2587	0.517
+8	05_loan_master.csv	appraisal_date	2592	0.518
+0	01_journal_entries.csv	approved_by	3224	0.320
+28	06a_pd_training_2024.csv	ltv	3338	0.415
+18	05a_borrowers.csv	years_in_business	3404	0.741
+17	05a_borrowers.csv	industry	3404	0.741
+19	05a_borrowers.csv	annual_revenue	3404	0.741
+20	05a_borrowers.csv	external_audit	3404	0.741
+6	05_loan_master.csv	industry	3700	0.740
+9	05_loan_master.csv	guarantor	4287	0.857
+23	06a_pd_training_2024.csv	industry	6004	0.747
+30	06a_pd_training_2024.csv	debt_ratio_pct	6079	0.756
+31	06a_pd_training_2024.csv	interest_coverage	6079	0.756
+32	06a_pd_training_2024.csv	utilization	6307	0.784
+1	01_journal_entries.csv	reference	9767	0.971
