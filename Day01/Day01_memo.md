@@ -56,5 +56,5 @@
   구글 코랩으로 진행: https://colab.research.google.com/drive/1Pg1nRdnInNU4BoRYnIXP7upC6x6zibDU#scrollTo=zdCwy1IZPx54
 
   결측치 확인 결과
-- 05e_pf_projects.csv	completion_guarantee	4	{'없음': 4} -> 결측에 대한 판단을 보류하고, 해당 4건의 거래에 대해 여신약정서(대출계약서)와 책임준공확약서/신탁계약서를 추가로 요청해서 해당 문서을 대사한 후 '없음'에 대한 판단을 수행함.
+- 05e_pf_projects.csv	파일 completion_guarantee 열에 {'없음': 4개} -> 결측에 대한 판단을 보류하고, 해당 4건의 거래에 대해 여신약정서(대출계약서)와 책임준공확약서/신탁계약서를 추가로 요청해서 해당 문서을 대사한 후 '없음'에 대한 판단을 수행함.
 - 
