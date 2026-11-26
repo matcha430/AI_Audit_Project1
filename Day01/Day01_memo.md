@@ -66,3 +66,18 @@
 - 08a_individual_assessment.csv 파일은 데이터가 적어 직접 확인해본 결과, appraisal_value 와 senior_lien 가 0 인 경우에만 null 값이 존재하므로 appraisal_date 와 assumed_haircut 모두 구조적 결측으로 판단함.
 - 11_writeoff_recovery.csv 파일의 approval_ref는 2025Q1부터는 null 값이 아닌 것으로 확인되므로 구조적 결측이다.
 - 13_loan_confirmations.csv 파일의 confirmed_balance 와 difference 가 미회신된 부분에 대해 null 인 것은 정상이나, **borrower_remark	가 회신된 부분에 대해 null 값을 가지는 것은 이상 결측이다.**
+
+즉, 특히 주의가 요구되는 결측 목록(파일 / 열 / 결측개수 / 결측률)
+- 01_journal_entries.csv/ reference	/9767	/0.971	
+- 01a_je_users.csv/	approval_limit	/1/	0.062	
+- 01a_je_users.csv/	termination_date	/15	/0.938	
+- 05_loan_master.csv/	approval_limit	/1	/0	
+- 05_loan_master.csv/	ltv_at_appraisal	/2587	/0.517	
+- 06a_pd_training_2024.csv/	annual_income_10k	/2518	/0.313
+- 06a_pd_training_2024.csv/	credit_score	/2207	/0.275
+- 13_loan_confirmations.csv/	borrower_remark	/42	/0.857
+
+
+
+
+
