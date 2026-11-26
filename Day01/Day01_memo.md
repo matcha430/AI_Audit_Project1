@@ -99,8 +99,6 @@
   2) 2026년 입력 전표 확인
 전기일자 = pd.to_datetime(tables["01_journal_entries.csv"]["posting_date"], errors="coerce")
 
-# dt 접근자를 사용하여 연도를 비교하고 데이터프레임을 필터링합니다.
-
 결과 = tables["01_journal_entries.csv"].loc[전기일자.notna() & (전기일자.dt.year != 2025)]
 display(결과)
 
