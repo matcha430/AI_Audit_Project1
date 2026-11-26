@@ -55,8 +55,8 @@
 ## ② 데이터 인벤토리 (노트북) ##
   구글 코랩으로 진행: https://colab.research.google.com/drive/1Pg1nRdnInNU4BoRYnIXP7upC6x6zibDU#scrollTo=zdCwy1IZPx54
 
-  결측치 확인 결과(과정과 근거는 코랩을 참조)
-- **01_journal_entries.csv 파일에서 created_by 가 U008 인 경우만 유일하게 적요가 공란인 전표가 있으므로 이는 이상 결측이다.**
+  1) 결측치 확인 결과(과정과 근거는 코랩을 참조)
+- 01_journal_entries.csv 파일에서 reference 는 특이 사항에만 적히므로, 이는 구조적 결측이다.
 - **01a_je_users.csv 파일에 approval_limit열이 null인  것은 이상 결측이며, termination_date열은 반대로 'null 값이 아닌' U007가 아직 users 파일에 있는 것은 이상 결측이다. (응용통제 중 접근보안 관련 취약점일 수 있음.)**
 - **05_loan_master.csv 파일에 approval_limit 열이 null 인 것은 이상 결측이다.**
 - 05_loan_master.csv은 appraisal_date 열이 "무담보, 예금, 보증서"는 nan인 것은 구조적 결측이나, **그 결측이 ltv_at_appraisal열과 일치하지 않는 것은 이상 결측이다.**
@@ -67,8 +67,7 @@
 - 11_writeoff_recovery.csv 파일의 approval_ref는 2025Q1부터는 null 값이 아닌 것으로 확인되므로 구조적 결측이다.
 - 13_loan_confirmations.csv 파일의 confirmed_balance 와 difference 가 미회신된 부분에 대해 null 인 것은 정상이나, **borrower_remark	가 회신된 부분에 대해 null 값을 가지는 것은 이상 결측이다.**
 
-즉, 특히 주의가 요구되는 결측 목록(파일 / 열 / 결측개수 / 결측률)
-- 01_journal_entries.csv/ reference	/9767	/0.971	
+즉, 특히 주의가 요구되는 결측 목록(파일 / 열 / 결측개수 / 결측률)	
 - 01a_je_users.csv/	approval_limit	/1/	0.062	
 - 01a_je_users.csv/	termination_date	/15	/0.938	
 - 05_loan_master.csv/	approval_limit	/1	/0	
@@ -77,7 +76,27 @@
 - 06a_pd_training_2024.csv/	credit_score	/2207	/0.275
 - 13_loan_confirmations.csv/	borrower_remark	/42	/0.857
 
+2) 2026년 입력 전표 확인
+전기일자 = pd.to_datetime(tables["01_journal_entries.csv"]["posting_date"], errors="coerce")
 
+# dt 접근자를 사용하여 연도를 비교하고 데이터프레임을 필터링합니다.
+
+결과 = tables["01_journal_entries.csv"].loc[전기일자.notna() & (전기일자.dt.year != 2025)]
+display(결과)
+
+print("2026년 입력 전표 개수: ", 결과["je_no"].nunique(), "개")
+
+위 코드로 확인 결과, 2026년 입력 전표는 55개로 확인됨.
+
+3) 추가 요청 PBC 목록
+  (1) U005 CFO 가 승인한 모든 거래와 이와 관련된 거래의 계약서
+  (2) U007 이 회사 관련 자료에 접근한 이력이 있는지에 대한 로그와, 퇴사자 관련 권한 해지 내부통제 설계서와 그 실행 로그
+  (3) loan_id: L004891 의 사업자등록증 확인하고 거래계약서와 외부조회내역, 매출원장 대사 내역
+  (4) 감정가액이 있음에도 ltv_at_appraisal 열이 null값인 거래들에 대해 ltv 계산을 요청한 후 그 내역
+  (5) 무직이 아니면서 annual_income_10k 이 null 값인 차주에 대한 소득내역
+  (6) 개인이면서 신용점수가 null 값인 차주에 대한 신용점수 내역
+  (7) 차주에 대해 회신되었음에도 회신 의견이 null 인 차주에 대한 회신 의견 내역
+  (8) 2026년의 거래가 재무제표에 반영되었는지 질문하고, 반영되었다면 2025년 내역만으로 계산된 재무제표 요청
 
 
 
