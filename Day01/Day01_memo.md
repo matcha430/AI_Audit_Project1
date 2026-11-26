@@ -81,7 +81,7 @@
 - **01a_je_users.csv 파일에 approval_limit열이 null인  것은 이상 결측이며, termination_date열은 반대로 'null 값이 아닌' U007가 아직 users 파일에 있는 것은 이상 결측이다. (응용통제 중 접근보안 관련 취약점일 수 있음.)**
   근거: ###01a_je_users.csv
 - **05_loan_master.csv 파일에 approval_limit 열이 null 인 것은 이상 결측이다.**
-- 05_loan_master.csv은 appraisal_date 열이 "무담보, 예금, 보증서"는 nan인 것은 구조적 결측이나, **그 결측이 ltv_at_appraisal열과 일치하지 않는 것은 이상 결측이다.**
+- 05_loan_master.csv은 appraisal_date 열이 "무담보, 예금, 보증서"는 nan인 것은 구조적 결측이며, 그 결측이 ltv_at_appraisal열과 일치하지 않는 것은 담보 유형이 예금이기 때문에 구조적 결측이다.
   근거: ###05_loan_master.csv
 - 05b_collateral_appraisals.csv 파일에서 appraisal_date 열의 결측은 구조적 결측이며, note 열이 null인 것 또한 개별적으로 확인해보니 구조적 결측으로 확인됨.
   근거: ###05b_collateral_appraisals.csv
@@ -93,7 +93,7 @@
   근거: ###08a_individual_assessment.csv
 - 11_writeoff_recovery.csv 파일의 approval_ref는 2025Q1부터는 null 값이 아닌 것으로 확인되므로 구조적 결측이다.
   근거: ###11_writeoff_recovery.csv
-- 13_loan_confirmations.csv 파일의 confirmed_balance 와 difference 가 미회신된 부분에 대해 null 인 것은 정상이나, **borrower_remark	가 회신된 부분에 대해 null 값을 가지는 것은 이상 결측이다.**
+- 13_loan_confirmations.csv 파일의 confirmed_balance 와 difference 가 미회신된 부분에 대해 null 인 것은 정상이며, borrower_remark	는 특이사항이 있는 경우에만 표시되어 null 값을 가지는 것은 구조적 결측이다.**
   근거: ###13_loan_confirmations.csv
 
   2) 2026년 입력 전표 확인
@@ -115,10 +115,8 @@ print("2026년 입력 전표 개수: ", 결과["je_no"].nunique(), "개")
 - 01a_je_users.csv/	approval_limit	/1/	0.062	
 - 01a_je_users.csv/	termination_date	/15	/0.938	
 - 05_loan_master.csv/	approval_limit	/1	/0	
-- 05_loan_master.csv/	ltv_at_appraisal	/2587	/0.517	
 - 06a_pd_training_2024.csv/	annual_income_10k	/2518	/0.313
 - 06a_pd_training_2024.csv/	credit_score	/2207	/0.275
-- 13_loan_confirmations.csv/	borrower_remark	/42	/0.857
 
 
 
@@ -131,15 +129,11 @@ print("2026년 입력 전표 개수: ", 결과["je_no"].nunique(), "개")
   
   (3) loan_id: L004891 의 사업자등록증 확인하고 거래계약서와 외부조회내역, 매출원장 대사 내역
   
-  (4) 감정가액이 있음에도 ltv_at_appraisal 열이 null값인 거래들에 대해 ltv 계산을 요청한 후 그 내역
+  (4) 무직이 아니면서 annual_income_10k 이 null 값인 차주에 대한 소득내역
   
-  (5) 무직이 아니면서 annual_income_10k 이 null 값인 차주에 대한 소득내역
+  (5) 개인이면서 신용점수가 null 값인 차주에 대한 신용점수 내역
   
-  (6) 개인이면서 신용점수가 null 값인 차주에 대한 신용점수 내역
-  
-  (7) 차주에 대해 회신되었음에도 회신 의견이 null 인 차주에 대한 회신 의견 내역
-  
-  (8) 2026년의 거래가 재무제표에 반영되었는지 질문하고, 반영되었다면 2025년 내역만으로 계산된 재무제표 요청
+  (6) 2026년의 거래가 재무제표에 반영되었는지 질문하고, 반영되었다면 2025년 내역만으로 계산된 재무제표 요청
 
 
 
