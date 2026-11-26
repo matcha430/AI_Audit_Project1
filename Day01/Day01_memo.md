@@ -55,6 +55,14 @@
 ## ② 데이터 인벤토리 (노트북) ##
   구글 코랩으로 진행: https://colab.research.google.com/drive/1Pg1nRdnInNU4BoRYnIXP7upC6x6zibDU#scrollTo=zdCwy1IZPx54
 
-  결측치 확인 결과
-- 05e_pf_projects.csv	파일 completion_guarantee 열에 {'없음': 4개} -> 결측에 대한 판단을 보류하고, 해당 4건의 거래에 대해 여신약정서(대출계약서)와 책임준공확약서/신탁계약서를 추가로 요청해서 해당 문서을 대사한 후 '없음'에 대한 판단을 수행함.
-- 
+  결측치 확인 결과(과정과 근거는 코랩을 참조)
+- **01_journal_entries.csv 파일에서 created_by 가 U008 인 경우만 유일하게 적요가 공란인 전표가 있으므로 이는 이상 결측이다.**
+- **01a_je_users.csv 파일에 approval_limit열이 null인  것은 이상 결측이며, termination_date열은 반대로 'null 값이 아닌' U007가 아직 users 파일에 있는 것은 이상 결측이다. (응용통제 중 접근보안 관련 취약점일 수 있음.)**
+- **05_loan_master.csv 파일에 approval_limit 열이 null 인 것은 이상 결측이다.**
+- 05_loan_master.csv은 appraisal_date 열이 "무담보, 예금, 보증서"는 nan인 것은 구조적 결측이나, **그 결측이 ltv_at_appraisal열과 일치하지 않는 것은 이상 결측이다.**
+- 05b_collateral_appraisals.csv 파일에서 appraisal_date 열의 결측은 구조적 결측이며, note 열이 null인 것 또한 개별적으로 확인해보니 구조적 결측으로 확인됨.
+- 06a_pd_training_2024.csv 파일의 industry, age, job_type, dsr이 null인것은 구조적 결측으로 확인됨.**annual_income_10k 열의 nan값과 무직과 기업 수가 일치하지 않는 것은 이상 결측이다. credit_score 열의 결측 개수가 기업 수와 일치하지 않는 것은 이상 결측이다.** ltv 결측(41.5%)은 segment 기준으로 0%/100% 완전히 구분됨(교차표 첨부). 결측 세그먼트는 신용·보증 기반 상품으로 LTV 산정 대상이 아니므로 구조적 결측으로 판단함.debt_ratio_pct 열의 결측은 segement 기준으로 PF 인 경우의 결측 개수와 일치하므로 구조적 결측으로 판단함. interest_coverage 또한 debt_ratio_pct 와 결측치가 존재하는 행이 일치하므로 구조적 결측으로 판단함.utilization 열은 segment에 따라 널값이 일관적이므로 구조적 결측으로 판단함.
+- 08_ecl_parameters.xlsx 개별 확인 결과, LGD담보의 결측은 보증서와 무담보의 haircut 은 존재할 수 없으므로 구조적 결측이며, CCF의 remark 결측은 특이사항이 있을 때만 적혀있는 구조이기 때문에 해당 결측은 구조적 결측이다.
+- 08a_individual_assessment.csv 파일은 데이터가 적어 직접 확인해본 결과, appraisal_value 와 senior_lien 가 0 인 경우에만 null 값이 존재하므로 appraisal_date 와 assumed_haircut 모두 구조적 결측으로 판단함.
+- 11_writeoff_recovery.csv 파일의 approval_ref는 2025Q1부터는 null 값이 아닌 것으로 확인되므로 구조적 결측이다.
+- 13_loan_confirmations.csv 파일의 confirmed_balance 와 difference 가 미회신된 부분에 대해 null 인 것은 정상이나, **borrower_remark	가 회신된 부분에 대해 null 값을 가지는 것은 이상 결측이다.**
